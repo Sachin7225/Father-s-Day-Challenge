@@ -1,0 +1,88 @@
+Day 2 of father's day challenge:
+Find Greatest Common Divisor of Array
+
+
+class Solution {
+    public int findGCD(int[] nums) {
+        int min = nums[0], max = nums[0];
+        for (int num : nums) {
+            if (num < min) min = num;
+            if (num > max) max = num;
+        }
+        return gcd(min, max);
+    }
+
+    private int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+}
+
+
+problem 2: Evaluate Reverse Polish Notation
+
+import java.util.Stack;
+
+
+
+class Solution {
+
+    public int evalRPN(String[] tokens) {
+
+        Stack<Integer> stack = new Stack<>();
+
+
+
+        for (String token : tokens) {
+
+            // If token is an operator
+
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+
+                int b = stack.pop(); // Second operand
+
+                int a = stack.pop(); // First operand
+
+
+
+                int result = 0;
+
+
+
+                switch (token) {
+
+                    case "+": result = a + b; break;
+
+                    case "-": result = a - b; break;
+
+                    case "*": result = a * b; break;
+
+                    case "/": result = a / b; break; // Truncates toward zero
+
+                }
+
+
+
+                stack.push(result);
+
+            } else {
+
+                // Token is a number
+
+                stack.push(Integer.parseInt(token));
+
+            }
+
+        }
+
+
+
+        return stack.pop(); // Final result
+
+    }
+
+}
